@@ -100,7 +100,7 @@ class TestChiefKeeper:
         newHat = mcd.ds_chief.get_hat()
         assert oldHat.address == newHat.address
 
-        # Move the 2000 MKR vote from the last spell in test_database.py to new spell
+        # Move the 2000 VDGT vote from the last spell in test_database.py to new spell
         self.spell = DSSSpell.deploy(mcd.web3, mcd.pause.address, mcd.vat.address)
         assert mcd.ds_chief.vote_yays([self.spell.address.address]).transact(from_address=guy_address)
 
@@ -121,14 +121,14 @@ class TestChiefKeeper:
         keeper.check_hat()
         keeper.check_eta()
 
-        # Give 5000 MKR to our_address
+        # Give 5000 VDGT to our_address
         amount = Wad.from_number(5000)
         mint_approve_lock(mcd, amount, our_address)
 
         # Deploy spell
         spell = DSSBadSpell.deploy(mcd.web3)
 
-        # Vote 5000 mkr on the spell
+        # Vote 5000 VDGT on the spell
         assert mcd.ds_chief.vote_yays([spell.address.address]).transact(from_address=our_address)
 
         keeper.check_hat()

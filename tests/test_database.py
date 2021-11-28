@@ -76,19 +76,19 @@ class TestSimpleDatabase:
 
         launch_chief(mcd, guy_address)
 
-        # Lock 1000 MKR from our_address
+        # Lock 1000 VDGT from our_address
         amount = Wad.from_number(1000)
         mint_approve_lock(mcd, amount, our_address)
 
-        # Lock 2000 MKR from guy_address
+        # Lock 2000 VDGT from guy_address
         guyAmount = Wad.from_number(2000)
         mint_approve_lock(mcd, guyAmount, guy_address)
 
         # Deploy spell
         self.spell = DSSSpell.deploy(mcd.web3, mcd.pause.address, mcd.vat.address)
 
-        # Vote 1000 mkr on our address and guy_address
-        # Vote 2000 mkr on global spell address
+        # Vote 1000 VDGT on our address and guy_address
+        # Vote 2000 VDGT on global spell address
         assert mcd.ds_chief.vote_yays([our_address.address, guy_address.address]).transact(from_address=our_address)
         assert mcd.ds_chief.vote_yays([self.spell.address.address]).transact(from_address=guy_address)
 
@@ -150,7 +150,7 @@ class TestSimpleDatabase:
     def test_yays_update(self, mcd: DssDeployment, simpledb: SimpleDatabase, our_address: Address,  guy_address: Address, zero_address: Address):
         print_out("test_yays_update")
 
-        # Vote 1000 mkr on our address
+        # Vote 1000 VDGT on our address
         assert mcd.ds_chief.vote_yays([our_address.address]).transact(from_address=our_address)
         block = mcd.web3.eth.blockNumber
 
